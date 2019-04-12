@@ -1,0 +1,37 @@
+<!DOCTYPEhtml>
+<htmlxmlns="http://www.w3.org/1999/xhtml"xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />
+<head>
+   <title>ServerProgramming</title>
+
+</head>
+<body>
+   <h1>Add New Item</h1>
+   <p class="text">Enter new item and start selling!</p>
+   <div>
+      <form th:object="${items}" th:action="@{save}" action="#" method="post" class="addform">
+      <div class="form-group row">
+         <label for="item_name" class="col-sm-3 col-form-label">Name</label>
+         <input type="text" id="item_name" th:field="*{name}" />
+      </div>
+      <div class="form-group row">   
+         <label for="item_price" class="col-sm-3 col-form-label">Price</label>
+         <input type="text" id="item_price" th:field="*{price}" />
+      </div>
+      <div class="form-group row">
+         <label for="item_description" class="col-sm-3 col-form-label">Description</label>
+         <input type="text" id="item_description" th:field="*{description}" />
+      </div>
+      <div class="form-group row">   
+         <label for="item_comment" class="col-sm-3 col-form-label">Comment</label>
+         <input type="text" id="item_comment" th:field="*{comment}" />
+      </div>
+         <input type="submit" value="Save" class="btn btn-success"></input>
+         <form action="/itemList" method="get">
+    <input type="submit" value="Go Back" 
+          id="frm1_submit" class="btn btn-success" />
+     </form>
+      </form>
+   </div>
+</body>
+</html>

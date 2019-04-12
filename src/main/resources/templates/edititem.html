@@ -1,0 +1,28 @@
+<!DOCTYPEhtml>
+<htmlxmlns="http://www.w3.org/1999/xhtml"xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />
+<head>
+   <title>ServerProgramming</title>
+</head>
+<body>
+   <h1>Modify the Item</h1>
+   <div>
+      <form th:object="${items}" th:action="@{../save}" action="#" method="post">
+         <input type="hidden" th:field="*{id}" />
+         <label for="item_name">Name</label>
+         <input type="text" id="author_field" th:field="*{name}" />
+         <label for="item_price">Price</label>
+         <input type="text" id="item_price" th:field="*{price}" />
+         <label for="item_description">Description</label>
+         <input type="text" id="item_description" th:field="*{description}" />
+         <label for="item_comment">Comment</label>
+         <input type="text" id="item_comment" th:field="*{comment}" />
+         <input type="submit" value="Save" class="btn btn-success"></input>
+         <form action="/itemList" method="get">
+    <input type="submit" value="Go Back" 
+          id="frm1_submit" class="btn btn-success" />
+     </form>
+      </form>
+   </div>
+</body>
+</html>
