@@ -1,0 +1,49 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<head>
+    <title>Pictures</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+	<h2>View The Available Pictures:)</h2>
+	<p>You can also download or delete any picture or upload new ones!</p>
+	<form action="/itemList" method="get">
+    <input type="submit" value="Go Back" 
+          id="frm1_submit" class="btn btn-success" />
+     </form>
+    <table class="table table-striped">
+		<tr>
+		    <th>Name</th>
+		    <th></th>
+		     <th></th>
+		</tr>  
+    	<tr th:each = "file : ${filelist}">
+    		<td th:text="${file.filename}"></td>
+ 				<td><a th:href="@{/file/{id}(id=${file.id})}" class="btn btn-primary">Download</a></td>
+ 				<td><a th:href="@{/filedelete/{id}(id=${file.id})}" class="btn btn-danger">Delete</a></td>    		
+    	</tr>
+     </table>
+     <form method="POST" th:action="@{/itemList}" enctype="multipart/form-data" id="file_upload">
+	     <input type="file" name="file" accept="image/*" id="f" />
+	     <input type="submit" value="Submit" class="btn btn-primary" />
+         </form>
+         <img id="img_preview" class="img-thumbnail"   />
+	    	
+</body>
+<script>
+function readURL(input) {
+  if (input.files && input.files[0]) {
+    var reader = new FileReader();
+    reader.onload = function(e) {
+      $('#img_preview').attr('src', e.target.result);
+    }
+    reader.readAsDataURL(input.files[0]);
+  }
+}
+$("#f").change(function() {
+  readURL(this);
+});
+</script>
+</html>
