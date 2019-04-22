@@ -59,7 +59,7 @@ h3 {
          <th>Price</th>
          <th>Description</th>
          <th>Comment</th>
-          <th >Pictures<th>
+          <th sec:authorize="hasAuthority('ADMIN')">Pictures<th>
           <th sec:authorize="hasAuthority('ADMIN')"> </th>
          <th sec:authorize="hasAuthority('ADMIN')"> </th>
       </tr>
@@ -68,31 +68,19 @@ h3 {
          <td th:text="${item.price}"></td>
          <td th:text="${item.description}"></td>
          <td th:text="${item.comment}"></td>
-         <td >
-         <form method="POST" th:action="@{/itemList}" enctype="multipart/form-data">
+         <td>
+         <form sec:authorize="hasAuthority('ADMIN')" method="POST" th:action="@{/itemList}" enctype="multipart/form-data">
 	     <input type="file" name="file" accept="image/*" id="f" class="images" />
 	     <input type="submit" value="Submit" disabled/>
          </form>
          </td>
-                 <td><button type='button' style="background: none">
-  <i class="glyphicon glyphicon-heart"></i>
-  <span>0</span>
-</button></td>
+         <td><a href="/filelist">View Images</a></td>
          <td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/edit/{id}(id=${item.id})}" class="btn btn-default"><i class="glyphicon glyphicon-pencil"></i></a></td>
          <td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/delete/{id}(id=${item.id})}" class="btn btn-danger" style="background-color: #BA0C0C">Delete</a></td>
       </tr>
    </table>
    <a sec:authorize="hasAuthority('ADMIN')" href="/add" class="btn btn-secondary btn-lg btn-block addbutton" >Add Item</a>
     <p><img id="img_preview" class="img-thumbnail"   /></p>
-    <script>
-   (function() {
-  $("button").click(function() {
-    $("span").html(function(i, val) {
-      return val * 1 + 1;
-    });
-  });
-}).call(this);
-   </script>
 <script>
 $(document).ready(
     function(){

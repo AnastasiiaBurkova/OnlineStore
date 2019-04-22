@@ -1,5 +1,21 @@
 package fi.haagahelia.OnlineStore;
 
+import java.io.IOException;
+import java.util.Date;
+import java.util.Properties;
+
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.Multipart;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeBodyPart;
+import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMultipart;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -29,28 +45,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		.authorizeRequests().anyRequest().authenticated().and().formLogin()
 				.loginPage("/login").defaultSuccessUrl("/itemList").permitAll().and().logout().permitAll();
 	}
-	/*@Bean
-    @Override
-    public UserDetailsService userDetailsService() {
-        List<UserDetails> users = new ArrayList();
-    	UserDetails user = User.withDefaultPasswordEncoder()
-                .username("user")
-                .password("password")
-                .roles("USER")
-                .build();
-
-    	users.add(user);
-    	
-    	user = User.withDefaultPasswordEncoder()
-                   .username("admin")
-                   .password("password")
-                   .roles("USER", "ADMIN")
-                   .build();
-    	
-    	users.add(user);
-    	
-        return new InMemoryUserDetailsManager(users);
-    }*/
 	@Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService).passwordEncoder(new BCryptPasswordEncoder());
