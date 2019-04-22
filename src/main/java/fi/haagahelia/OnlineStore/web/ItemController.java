@@ -21,6 +21,7 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
+import javax.validation.Valid;
 import javax.mail.Authenticator;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +30,9 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -37,6 +40,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import fi.haagahelia.OnlineStore.domain.Email;
 import fi.haagahelia.OnlineStore.domain.File;
 import fi.haagahelia.OnlineStore.domain.FileRepository;
 import fi.haagahelia.OnlineStore.domain.Item;
@@ -60,8 +64,14 @@ public class ItemController {
 	        return "login";
 	    }
 	
-	@RequestMapping(value = "/sendemail")
-	public String sendEmail() throws AddressException, MessagingException, IOException {
+	  @RequestMapping(value = "/emailbox")
+	    public String emailpage(){
+	        return "emailbox";
+	    }
+	
+	@RequestMapping(value = "/sendemail", method = RequestMethod.POST)
+	public String sendEmail(@Valid @ModelAttribute("email") Email email,BindingResult bindingResult) throws AddressException, MessagingException, IOException {
+		if (!bindingResult.hasErrors()) {
 		Properties props = new Properties();
 		   props.put("mail.smtp.auth", "true");
 		   props.put("mail.smtp.starttls.enable", "true");
@@ -74,24 +84,31 @@ public class ItemController {
 		      }
 		   });
 		   Message msg = new MimeMessage(session);
+		   
+		   //model.addAttribute("emailbox", new Email());
+		   
 		   msg.setFrom(new InternetAddress("afronika15@gmail.com", false));
 
 		   msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse("afronika15@gmail.com"));
-		   msg.setSubject("Tutorials point email");
-		   msg.setContent("Tutorials point email", "text/html");
+		   msg.setSubject(email.getSubject());
+		   msg.setContent(email.getContent(), "text/html");
 		   msg.setSentDate(new Date());
 
 		   MimeBodyPart messageBodyPart = new MimeBodyPart();
-		   messageBodyPart.setContent("Tutorials point email", "text/html");
+		   messageBodyPart.setContent(email.getContent(), "text/html");
 
 		   Multipart multipart = new MimeMultipart();
 		   multipart.addBodyPart(messageBodyPart);
-		   MimeBodyPart attachPart = new MimeBodyPart();
+		   /*MimeBodyPart attachPart = new MimeBodyPart();
 
 		   attachPart.attachFile("/Users/aburkova/Downloads/hamster.jpeg");
-		   multipart.addBodyPart(attachPart);
+		   multipart.addBodyPart(attachPart);*/
 		   msg.setContent(multipart);
-		   Transport.send(msg);  
+		   Transport.send(msg); 
+		}
+		else {
+	    		return "itemlist";
+		}
 	   return "success";   
 	} 
 	

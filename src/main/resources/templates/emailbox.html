@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+ 	<form th:action="@{/sendemail}" method="post">
+            <div><label> Subject : <input type="text" name="subject"/> </label></div>
+            <div><label> Content: <textarea type="text" name="content"></textarea> </label></div>
+            <div><input type="submit" value="Send Email"/></div>
+        </form>
+ 	<form action="/itemList" method="get">
+    <input type="submit" value="Go Back" 
+          id="frm1_submit" />
+     </form>
+</body>
+</html>
