@@ -1,71 +1,79 @@
 <!DOCTYPEhtml>
-<htmlxmlns="http://www.w3.org/1999/xhtml"xmlns:th="http://www.thymeleaf.org">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />
-<link href="//netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<head>
-   <title>ServerProgramming</title>
-    <style>
-h3 {
- margin-right: auto;
-    margin-left: auto;
-    width: 40%;
-    color: #BA0C0C;
-}
-.addform {
-    margin: auto;
-    width: 100%;
-    padding: 10px;
-}
-.buttons {
-padding: 10px;
-    margin:auto; 
-    background-color:#BA0C0C; 
-    border-radius:2;
-    margin-right:5px;
+<htmlxmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-}
-html, body {
-    height: 100%;
-}
+    <head>
+        <title>ServerProgramming</title>
+        <style>
+            h3 {
+                margin-right: auto;
+                margin-left: auto;
+                width: 40%;
+                color: #BA0C0C;
+            }
+            
+            .addform {
+                margin: auto;
+                width: 100%;
+                padding: 10px;
+            }
+            
+            .buttons {
+                padding: 10px;
+                margin: auto;
+                background-color: #BA0C0C;
+                border-radius: 2;
+                margin-right: 5px;
+            }
+            
+            html,
+            body {
+                height: 100%;
+            }
+            
+            html {
+                display: table;
+                margin: auto;
+            }
+            
+            body {
+                display: table-cell;
+                vertical-align: middle;
+            }
+        </style>
 
-html {
-    display: table;
-    margin: auto;
-}
+    </head>
 
-body {
-    display: table-cell;
-    vertical-align: middle;
-}
-</style>
+    <body>
+        <h1>Add New Item</h1>
+        <p class="text">Enter new item and start selling!</p>
+        <div class="p-3 mb-2 bg-dark text-white">
+            <form th:object="${items}" th:action="@{save}" action="#" method="post" class="addform">
+                <div class="form-group row">
+                    <label for="item_name" class="col-sm-3 col-form-label">Name
+                        <input class="text-dark" type="text" id="item_name" th:field="*{name}" />
+                    </label>
+                </div>
+                <div class="form-group row">
+                    <label for="item_price" class="col-sm-3 col-form-label">Price
+                        <input class="text-dark" type="text" id="item_price" th:field="*{price}" />
+                    </label>
+                </div>
+                <div class="form-group row">
+                    <label for="item_description" class="col-sm-3 col-form-label">Description
+                        <textarea class="text-dark" type="text" id="item_description" th:field="*{description}" />
+                    </label>
+                </div>
+                <div>
+                    <input type="submit" value="Save" class="btn btn-secondary buttons" style="background-color: #2da7af; float:left;"></input>
+            </form>
+            <form action="/itemList" method="get">
+                <input type="submit" value="Go Back" id="frm1_submit" class="btn btn-secondary buttons" />
+            </form>
+            </div>
+        </div>
+    </body>
 
-</head>
-<body>
-   <h1>Add New Item</h1>
-   <p class="text">Enter new item and start selling!</p>
-   <div class="p-3 mb-2 bg-dark text-white">
-      <form th:object="${items}" th:action="@{save}" action="#" method="post" class="addform">
-      <div class="form-group row">
-         <label for="item_name" class="col-sm-3 col-form-label">Name
-         <input class="text-dark" type="text" id="item_name" th:field="*{name}" /></label>
-      </div>
-      <div class="form-group row">   
-         <label for="item_price" class="col-sm-3 col-form-label">Price
-         <input class="text-dark" type="text" id="item_price" th:field="*{price}" /></label>
-      </div>
-      <div class="form-group row">
-         <label for="item_description" class="col-sm-3 col-form-label">Description
-         <textarea class="text-dark" type="text" id="item_description" th:field="*{description}" /></label>
-      </div>
-      <div>
-         <input type="submit" value="Save" class="btn btn-secondary buttons" style="background-color: #2da7af; float:left;"></input>
-      </form>
-           <form action="/itemList" method="get">
-    <input type="submit" value="Go Back" 
-          id="frm1_submit" class="btn btn-secondary buttons" />
-     </form>
-     </div>
-   </div>
-</body>
-</html>
+    </html>

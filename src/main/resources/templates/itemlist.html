@@ -4,115 +4,123 @@
 <link href="//netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
 <head>
-   <title>BuySellOnline</title>
-   <style>
-h3 {
- margin-right: auto;
-    margin-left: auto;
-    width: 40%;
-    color: #BA0C0C;
-}
-.signout {
-padding: 10px;
-    margin:auto; 
-    background-color:#BA0C0C; 
-    border-radius:2;
-    float:left;
-    margin-right:5px;
-
-}
-.table {
-    margin: auto;
-    width: 100%;
-    padding: 10px;
-}
-.addbutton {
-    display: table; 
-    width:100%; 
-    padding: 10px;
-    margin:auto; 
-    background-color:#2da7af; 
-    border-radius:0;
-}
-html, body {
-    height: 100%;
-}
-
-html {
-    display: table;
-    margin: auto;
-}
-
-body {
-    display: table-cell;
-    vertical-align: middle;
-}
-</style>
+    <title>BuySellOnline</title>
+    <style>
+        h3 {
+            margin-right: auto;
+            margin-left: auto;
+            width: 40%;
+            color: #BA0C0C;
+        }
+        
+        .signout {
+            padding: 10px;
+            margin: auto;
+            background-color: #BA0C0C;
+            border-radius: 2;
+            float: left;
+            margin-right: 5px;
+        }
+        
+        .table {
+            margin: auto;
+            width: 100%;
+            padding: 10px;
+        }
+        
+        .addbutton {
+            display: table;
+            width: 100%;
+            padding: 10px;
+            margin: auto;
+            background-color: #2da7af;
+            border-radius: 0;
+        }
+        
+        html,
+        body {
+            height: 100%;
+        }
+        
+        html {
+            display: table;
+            margin: auto;
+        }
+        
+        body {
+            display: table-cell;
+            vertical-align: middle;
+        }
+    </style>
 </head>
+
 <body>
-<div>
-<h3 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h3>
-<form th:action="@{/logout}" method="post">
-<input class="btn btn-danger signout" type="submit" value="Sign Out"/>
-</form>
-<a class="btn btn-secondary signout" style="background-color: #2da7af" href="/emailbox">Send Email</a>
-</div>
-<div style="margin-top: 10%">
-   <h1>Welcome to Online Store</h1>
-   <p class="text">Its a unique platform for people to buy or sell items from an array of products & services!</p>
-   <table id="tb" class="table table-striped table-dark">
-      <tr>
-         <th>Item</th>
-         <th>Price</th>
-         <th>Description</th>
-          <th sec:authorize="hasAuthority('ADMIN')">Pictures<th>
-          <th sec:authorize="hasAuthority('ADMIN')"> </th>
-         <th sec:authorize="hasAuthority('ADMIN')"> </th>
-      </tr>
-      <tr th:each = "item : ${items}">
-         <td th:text="${item.name}"></td>
-         <td th:text="${item.price}"></td>
-         <td th:text="${item.description}"></td>
-         <td>
-         <form sec:authorize="hasAuthority('ADMIN')" method="POST" th:action="@{/itemList}" enctype="multipart/form-data">
-	     <input type="file" name="file" accept="image/*" id="f" class="images" />
-	     <input type="submit" value="Submit" disabled/>
-         </form>
-         </td>
-         <td><a href="/filelist">View Images</a></td>
-         <td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/edit/{id}(id=${item.id})}" class="btn btn-default"><i class="glyphicon glyphicon-pencil"></i></a></td>
-         <td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/delete/{id}(id=${item.id})}" class="btn btn-danger" style="background-color: #BA0C0C">Delete</a></td>
-      </tr>
-   </table>
-   <a sec:authorize="hasAuthority('ADMIN')" href="/add" class="btn btn-secondary btn-lg btn-block addbutton" >Add Item</a>
-    <p><img id="img_preview" class="img-thumbnail"   /></p>
+    <div>
+        <h3 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h3>
+        <form th:action="@{/logout}" method="post">
+            <input class="btn btn-danger signout" type="submit" value="Sign Out" />
+        </form>
+        <a class="btn btn-secondary signout" style="background-color: #2da7af" href="/emailbox">Send Email</a>
     </div>
-<script>
-$(document).ready(
-    function(){
-        $('input:file').change(
-            function(){
-                if ($(this).val()) {
-                    $('input:submit').attr('disabled',false); 
-                } 
+    <div style="margin-top: 10%">
+        <h1>Welcome to Online Store</h1>
+        <p class="text">Its a unique platform for people to buy or sell items from an array of products & services!</p>
+        <table id="tb" class="table table-striped table-dark">
+            <tr>
+                <th>Item</th>
+                <th>Price</th>
+                <th>Description</th>
+                <th sec:authorize="hasAuthority('ADMIN')">Pictures
+                    <th>
+                        <th sec:authorize="hasAuthority('ADMIN')"> </th>
+                        <th sec:authorize="hasAuthority('ADMIN')"> </th>
+            </tr>
+            <tr th:each="item : ${items}">
+                <td th:text="${item.name}"></td>
+                <td th:text="${item.price}"></td>
+                <td th:text="${item.description}"></td>
+                <td>
+                    <form sec:authorize="hasAuthority('ADMIN')" method="POST" th:action="@{/itemList}" enctype="multipart/form-data">
+                        <input type="file" name="file" accept="image/*" id="f" class="images" />
+                        <input type="submit" value="Submit" disabled/>
+                    </form>
+                </td>
+                <td><a href="/filelist">View Images</a></td>
+                <td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/edit/{id}(id=${item.id})}" class="btn btn-default"><i class="glyphicon glyphicon-pencil"></i></a></td>
+                <td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/delete/{id}(id=${item.id})}" class="btn btn-danger" style="background-color: #BA0C0C">Delete</a></td>
+            </tr>
+        </table>
+        <a sec:authorize="hasAuthority('ADMIN')" href="/add" class="btn btn-secondary btn-lg btn-block addbutton">Add Item</a>
+        <p><img id="img_preview" class="img-thumbnail" /></p>
+    </div>
+    <script>
+        $(document).ready(
+            function() {
+                $('input:file').change(
+                    function() {
+                        if ($(this).val()) {
+                            $('input:submit').attr('disabled', false);
+                        }
+                    }
+                );
+            });
+    </script>
+    <script>
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    $('#img_preview').attr('src', e.target.result);
+                }
+                reader.readAsDataURL(input.files[0]);
             }
-            );
-    });
-</script>
-<script>
-function readURL(input) {
-  if (input.files && input.files[0]) {
-    var reader = new FileReader();
-    reader.onload = function(e) {
-      $('#img_preview').attr('src', e.target.result);
-    }
-    reader.readAsDataURL(input.files[0]);
-  }
-}
-$(".images").change(function() {
-  readURL(this);
-});
-</script>
+        }
+        $(".images").change(function() {
+            readURL(this);
+        });
+    </script>
 </body>
+
 </html>

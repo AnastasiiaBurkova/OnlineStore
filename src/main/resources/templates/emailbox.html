@@ -1,14 +1,61 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<head>
+    <style>
+        .buttons {
+            padding: 10px;
+            margin: auto;
+            background-color: #BA0C0C;
+            border-radius: 2;
+            margin-right: 5px;
+        }
+        
+        html,
+        body {
+            height: 100%;
+        }
+        
+        html {
+            display: table;
+            margin: auto;
+        }
+        
+        body {
+            display: table-cell;
+            vertical-align: middle;
+        }
+    </style>
+</head>
+
 <body>
- 	<form th:action="@{/sendemail}" method="post">
-            <div><label> Subject : <input type="text" name="subject"/> </label></div>
-            <div><label> Content: <textarea type="text" name="content"></textarea> </label></div>
-            <div><input type="submit" value="Send Email"/></div>
+    <h1>Email</h1>
+    <div class="p-3 mb-2 bg-dark text-white">
+        <form th:action="@{/sendemail}" method="post">
+            <div class="form-group row" style="padding:6px">
+                <label class="col-sm-3 col-form-label"> Subject </label>
+                <div class="col-sm-10">
+                    <input class="text-dark" type="text" name="subject" /> </div>
+            </div>
+            <div class="form-group row" style="padding:6px">
+                <label class="col-sm-3 col-form-label"> Content </label>
+                <div class="col-sm-10">
+                    <textarea class="text-dark" type="text" name="content"></textarea>
+                </div>
+            </div>
+            <div>
+                <div>
+                    <input type="submit" value="Send Email" class="btn btn-secondary buttons" style="background-color: #2da7af; float:left;" />
+                </div>
         </form>
- 	<form action="/itemList" method="get">
-    <input type="submit" value="Go Back" 
-          id="frm1_submit" />
-     </form>
+        <form action="/itemList" method="get">
+            <input type="submit" class="btn btn-secondary buttons" value="Go Back" id="frm1_submit" />
+        </form>
+        </div>
+    </div>
 </body>
+
 </html>
