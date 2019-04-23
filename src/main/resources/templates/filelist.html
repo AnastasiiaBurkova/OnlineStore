@@ -26,8 +26,10 @@
     	</tr>
      </table>
      <form method="POST" th:action="@{/itemList}" enctype="multipart/form-data" id="file_upload">
-	     <input type="file" name="file" accept="image/*" id="f" />
+     <div class="form-group">
+	     <input type="file" class="form-control-file" name="file" accept="image/*" id="f" />
 	     <input type="submit" value="Submit" class="btn btn-primary" />
+	     </div>
          </form>
          <img id="img_preview" class="img-thumbnail"   />
 	    	

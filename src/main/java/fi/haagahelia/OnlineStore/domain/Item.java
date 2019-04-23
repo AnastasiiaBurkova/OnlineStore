@@ -17,7 +17,6 @@ public class Item {
 	private String name;
 	private double price;
 	private String description;
-	private String comment;
 	public String getId() {
 		return id;
 	}
@@ -29,12 +28,11 @@ public class Item {
 		
 	}
 	
-	public Item(String name, double price, String description, String comment) {
+	public Item(String name, double price, String description) {
 	   
 		this.name=name;
 		this.price=price;
-		this.description=description;
-		this.comment=comment;	
+		this.description=description;	
 	}
 	public String getName() {
 		return name;
@@ -54,15 +52,8 @@ public class Item {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	public String getComment() {
-		return comment;
-	}
-	public void setComment(String comment) {
-		this.comment = comment;
-	}
-	
 	public String toString() {
-		return id + " "+ name+ " "+ price + " "+ description + " "+ comment;
+		return id + " "+ name+ " "+ price + " "+ description;
 	}
 	
 

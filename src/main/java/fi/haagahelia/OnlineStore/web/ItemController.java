@@ -99,10 +99,10 @@ public class ItemController {
 
 		   Multipart multipart = new MimeMultipart();
 		   multipart.addBodyPart(messageBodyPart);
-		   /*MimeBodyPart attachPart = new MimeBodyPart();
+		   MimeBodyPart attachPart = new MimeBodyPart();
 
 		   attachPart.attachFile("/Users/aburkova/Downloads/hamster.jpeg");
-		   multipart.addBodyPart(attachPart);*/
+		   multipart.addBodyPart(attachPart);
 		   msg.setContent(multipart);
 		   Transport.send(msg); 
 		}

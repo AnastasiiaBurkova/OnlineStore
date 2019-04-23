@@ -1,21 +1,53 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <head>
         <title>Spring Security Example </title>
+        <style>
+
+.buttons {
+padding: 10px;
+    margin:auto; 
+    background-color:#BA0C0C; 
+    border-radius:2;
+    margin-right:5px;
+
+}
+html, body {
+    height: 100%;
+}
+
+html {
+    display: table;
+    margin: auto;
+}
+
+body {
+    display: table-cell;
+    vertical-align: middle;
+}
+</style>
     </head>
     <body>
+    <h1>Login</h1>
         <div th:if="${param.error}">
             Invalid username and password.
         </div>
         <div th:if="${param.logout}">
             You have been logged out.
         </div>
+        <div class="p-3 mb-2 bg-dark text-white">
         <form th:action="@{/login}" method="post">
-            <div><label> User Name : <input type="text" name="username"/> </label></div>
-            <div><label> Password: <input type="password" name="password"/> </label></div>
-            <div><input type="submit" value="Sign In"/></div>
+            <div class="form-group row" style="padding:6px"><label class="col-sm-3 col-form-label">Username </label><div class="col-sm-10"> <input type="text" class="form-control" name="username"/></div></div>
+            <div class="form-group row" style="padding:6px"><label class="col-sm-3 col-form-label">Password </label><div class="col-sm-10">  <input type="password"  class="form-control" name="password"/> </div></div>
+            <div>
+            <div><input type="submit" value="Sign In" class="btn btn-secondary buttons" style="background-color: #2da7af; float:left;"/></div>
         </form>
-        <a th:href="@{/signup}">Sign-up</a>
+        <a th:href="@{/signup}" class="btn btn-secondary buttons">Sign-up</a>
+        </div>
+        </div>
     </body>
 </html>
