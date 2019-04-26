@@ -115,8 +115,7 @@ public class ItemController {
 			Multipart multipart = new MimeMultipart();
 			multipart.addBodyPart(messageBodyPart);
 			MimeBodyPart attachPart = new MimeBodyPart();
-
-			attachPart.attachFile("/Users/aburkova/Downloads/hamster.jpeg");
+			attachPart.attachFile("/Users/aburkova/Downloads/"+email.getFile().getPath());
 			multipart.addBodyPart(attachPart);
 			msg.setContent(multipart);
 			Transport.send(msg);
@@ -198,20 +197,15 @@ public class ItemController {
 			File fileModel = new File(file.getOriginalFilename(), file.getBytes());
 			filerepository.save(fileModel);
 			byte[] bytes = file.getBytes();
-			System.out.println(filerepository.count() + "repo");
 			int i = 0;
+			Path path_dir = null;
 			for (i = 0; i < itemrepository.count(); i++) {
-				Path path_dir = Files
+				 path_dir = Files
 						.createDirectories(Paths.get(uploadFolder + itemrepository.findAll().get(i).getId()));
-
-				System.out.println("blabla" + itemrepository.findAll().get(i).getId());
-				System.out.println("first" + itemrepository.findAll().get(i));
-
-				System.out.println("path_dir" + path_dir);
-
+			}
 				Path path = Paths.get(path_dir + "/" + file.getOriginalFilename());
 				Files.write(path, bytes);
-			}
+			
 			return "redirect:/filelist";
 		} catch (IOException e) {
 			e.printStackTrace();
