@@ -44,6 +44,12 @@ import fi.haagahelia.OnlineStore.domain.FileRepository;
 import fi.haagahelia.OnlineStore.domain.Item;
 import fi.haagahelia.OnlineStore.domain.ItemRepository;
 
+/**
+ * The item controller handles requests related to the main functionality, i.e.
+ * itemList and filelist.
+ * 
+ * @author aburkova
+ */
 @Controller
 public class ItemController {
 
@@ -115,7 +121,7 @@ public class ItemController {
 			Multipart multipart = new MimeMultipart();
 			multipart.addBodyPart(messageBodyPart);
 			MimeBodyPart attachPart = new MimeBodyPart();
-			attachPart.attachFile("/Users/aburkova/Downloads/"+email.getFile().getPath());
+			attachPart.attachFile("/Users/aburkova/Downloads/" + email.getFile().getPath());
 			multipart.addBodyPart(attachPart);
 			msg.setContent(multipart);
 			Transport.send(msg);
@@ -187,6 +193,14 @@ public class ItemController {
 		return "redirect:../itemList";
 	}
 
+	/**
+	 * Implements upload file functionality.
+	 * 
+	 * @param file
+	 * @param model
+	 * @param item
+	 * @return
+	 */
 	@PostMapping("/itemList")
 	public String fileUpload(@RequestParam("file") MultipartFile file, Model model, Item item) {
 		if (file.isEmpty()) {
@@ -200,12 +214,11 @@ public class ItemController {
 			int i = 0;
 			Path path_dir = null;
 			for (i = 0; i < itemrepository.count(); i++) {
-				 path_dir = Files
-						.createDirectories(Paths.get(uploadFolder + itemrepository.findAll().get(i).getId()));
+				path_dir = Files.createDirectories(Paths.get(uploadFolder + itemrepository.findAll().get(i).getId()));
 			}
-				Path path = Paths.get(path_dir + "/" + file.getOriginalFilename());
-				Files.write(path, bytes);
-			
+			Path path = Paths.get(path_dir + "/" + file.getOriginalFilename());
+			Files.write(path, bytes);
+
 			return "redirect:/filelist";
 		} catch (IOException e) {
 			e.printStackTrace();

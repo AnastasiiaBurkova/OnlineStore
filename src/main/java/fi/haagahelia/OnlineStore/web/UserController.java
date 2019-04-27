@@ -16,6 +16,12 @@ import fi.haagahelia.OnlineStore.domain.SignupForm;
 import fi.haagahelia.OnlineStore.domain.User;
 import fi.haagahelia.OnlineStore.domain.UserRepository;
 
+/**
+ * The user controller handles requests related to users sign up and saving
+ * credentials.
+ * 
+ * @author aburkova
+ */
 @Controller
 public class UserController {
 	@Autowired

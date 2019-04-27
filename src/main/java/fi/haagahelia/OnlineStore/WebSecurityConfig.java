@@ -10,6 +10,12 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import fi.haagahelia.OnlineStore.web.UserDetailServiceImpl;
 
+/**
+ * Configures and secures access to the main itemList page by throwing login
+ * page. Sets permissions and user details with BCrypted password.
+ * 
+ * @author aburkova
+ */
 @Configuration
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 @EnableWebSecurity

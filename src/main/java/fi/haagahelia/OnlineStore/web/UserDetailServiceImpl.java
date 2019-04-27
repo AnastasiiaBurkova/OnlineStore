@@ -9,7 +9,11 @@ import org.springframework.stereotype.Service;
 
 import fi.haagahelia.OnlineStore.domain.User;
 import fi.haagahelia.OnlineStore.domain.UserRepository;
-
+/**
+ * Handles users and their roles.
+ * 
+ * @author aburkova
+ */
 @Service
 public class UserDetailServiceImpl implements UserDetailsService {
 
