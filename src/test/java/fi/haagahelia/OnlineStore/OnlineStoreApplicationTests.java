@@ -10,7 +10,11 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import fi.haagahelia.OnlineStore.web.ItemController;
 import fi.haagahelia.OnlineStore.web.UserController;
-
+/**
+ * Controllers testing.
+ * 
+ * @author aburkova
+ */
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class OnlineStoreApplicationTests {
