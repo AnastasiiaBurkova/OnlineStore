@@ -24,6 +24,14 @@
             margin-right: 5px;
         }
         
+        .viewimg {
+            padding: 10px;
+            margin: auto;
+            border-radius: 2;
+            float: left;
+            margin-right: 5px;
+        }
+        
         .table {
             margin: auto;
             width: 100%;
@@ -63,6 +71,7 @@
             <input class="btn btn-danger signout" type="submit" value="Sign Out" />
         </form>
         <a class="btn btn-secondary signout" style="background-color: #2da7af" href="/emailbox">Send Email</a>
+        <a class="btn btn-secondary viewimg" href="/filelist">View Images</a>
     </div>
     <div style="margin-top: 10%">
         <h1>Welcome to Online Store</h1>
@@ -87,7 +96,6 @@
                         <input type="submit" value="Submit" disabled/>
                     </form>
                 </td>
-                <td><a href="/filelist">View Images</a></td>
                 <td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/edit/{id}(id=${item.id})}" class="btn btn-default"><i class="glyphicon glyphicon-pencil"></i></a></td>
                 <td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/delete/{id}(id=${item.id})}" class="btn btn-danger" style="background-color: #BA0C0C">Delete</a></td>
             </tr>
