@@ -8,13 +8,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
-import fi.haagahelia.OnlineStore.domain.SignupForm;
-import fi.haagahelia.OnlineStore.domain.User;
-import fi.haagahelia.OnlineStore.domain.UserRepository;
+import fi.haagahelia.OnlineStore.domain.*;
 
 /**
  * The user controller handles requests related to users sign up and saving
